@@ -1,9 +1,11 @@
 package me.fernando.collections
 
+import me.fernando.collections.model.Funcionario
+
 fun main() {
-    val func1 = Funcionario(nome = "Klaus", salario = 12300.00)
-    val func2 = Funcionario(nome = "Fernando", salario = 2500.00)
-    val func3 = Funcionario(nome = "Isabela", salario = 4500.00)
+    val func1 = Funcionario(nome = "Klaus", salario = 12300.00, tipoContratacao = "CLT")
+    val func2 = Funcionario(nome = "Fernando", salario = 2500.00, tipoContratacao = "CLT")
+    val func3 = Funcionario(nome = "Isabela", salario = 4500.00, tipoContratacao = "PJ")
 
     val funcionarios = listOf(func1,func2,func3)
     funcionarios.forEach {
@@ -17,15 +19,9 @@ fun main() {
     funcionarios
         .sortedBy {it.salario}
         .forEach {println(it)}
-}
-
-data class Funcionario (
-    val nome : String,
-    val salario : Double
-) {
-    override fun toString(): String =
-        """
-            Nome: $nome
-            Salário: ${"R$%.2f".format(salario)}
-        """.trimIndent()
+    println("<--------------------------------------->")
+    
+    funcionarios
+        .groupBy { it.tipoContratacao }
+        .forEach { println(it) }
 }
